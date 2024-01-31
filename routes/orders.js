@@ -6,7 +6,7 @@ import { auth, authAdmin } from "../middlwares/auth.js";
 routerP.get("/", getAllOrders);
 routerP.get("/:id",auth, getOrdertById);
 routerP.delete("/:id",auth,deleteOrder);
-routerP.put("/:id",updateById);
+routerP.put("/:id",authAdmin,updateById);
 routerP.post("/",auth, addOrder);
 
 export default routerP;
