@@ -45,9 +45,10 @@ message:"please send email user name and password"
 
 });
 try{
-const user=await userModel.findOne({email:email});
+    const user = await userModel.findOne({ email: email });
+
 if(!user)
-return res.status(404).json({type:"no user",message:"one or more details are invalid"})
+return res.status(404).json({type:"no user",message:"User does not exist"})
 if(!await bcrypt.compare(password,user.password))
 return res.status(404).json({type:"no user",message:"user password is invalid"})
 let token=generateToken(user._id,user.role,user.userName)

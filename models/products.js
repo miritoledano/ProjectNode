@@ -8,7 +8,9 @@ const ProductsSchema =mongoose.Schema ({
     code: String,
     Discribe:String,
     DateOfProduction:Date,
-    ImagePath: String
+    ImagePath: String,
+    price:Number
+   
 
 });
 

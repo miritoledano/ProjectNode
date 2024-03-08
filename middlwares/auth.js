@@ -20,7 +20,7 @@ export const authAdmin=(req,res,next)=>{
         let user=jwt.verify(token,process.env.SECRET_JWT);
         console.log(user)
         console.log(user.role)
-        if(user._id.role!="ADMIN"){
+        if(user.role!="ADMIN"){
             return res.status(403).json({type:"not allowed",message:"this operation only manager"})
         }
 

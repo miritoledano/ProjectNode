@@ -2,26 +2,33 @@ import mongoose from "mongoose";
 import { productModel } from "../models/products.js";
 import { orderValidatorForAdd } from "../models/products.js";
 
+
 export const getAllProducts = async (req, res, next) => {
-  let txt = req.query.txt || undefined;
- let page = req.query.page || 1;
- let perPage = req.query.perPage || 30;
- try {
-    let AllProducts = await productModel
- .find({ $or: [{ name: txt }, { code: txt }] })
- .skip((page - 1) * perPage)
-.limit(perPage);
- if (!txt) {
- AllProducts = await productModel.find();
- }
- res.json(AllProducts);
- } catch (err) {
-next({
- status: 400,
- type: "invalid operation",
- message: "sorry cannot get products",
-});
-}
+  try {
+    let txt = req.query.txt || undefined;
+    let page = req.query.page || 1;
+    let perPage = req.query.perPage || 7;
+
+    let AllProducts;
+
+    if (!txt) {
+      AllProducts = await productModel.find().skip((page - 1) * perPage)
+      .limit(perPage);;
+    } else {
+      AllProducts = await productModel
+        .find({ $or: [{ name: txt }, { code: txt }] })
+        .skip((page - 1) * perPage)
+        .limit(perPage);
+    }
+
+    res.json(AllProducts);
+  } catch (err) {
+    next({
+      status: 400,
+      type: "invalid operation",
+      message: "sorry cannot get products",
+    });
+  }
 };
 
 export const getPtoductById = async (req, res, next) => {

@@ -18,27 +18,7 @@ export const getAllOrders = async (req, res, next) => {
 };
 
 
-// export const getOrdertById = async (req, res, next) => {
-//   let { userId } = req.params;
-//   try {
-//     if (!mongoose.isValidObjectId(userId)) {
-//       const err = new Error("Invalid ID format");
-//       err.status = 400;
-//       throw err;
-//     }
 
-//     let order = await orderModel.findById({ userId: userId });
-//     if (!order) {
-//       const err = new Error("Order not found");
-//       err.status = 404;
-//       throw err;
-//     }
-
-//     return res.json(order);
-//   } catch (err) {
-//     next(err);
-//   }
-// };
 export const  getOrdertById= async (req, res) => {
   try {
 

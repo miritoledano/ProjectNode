@@ -1,4 +1,5 @@
 
+import { json } from "express";
 import Joi from "joi";
 import mongoose from "mongoose";
 // import { productSchema } from "products.";
@@ -6,7 +7,7 @@ import mongoose from "mongoose";
 const minimalPrudactSchema = mongoose.Schema({
   CountProduct:Number,
   name:String,
-  code:String
+  _id:String
 
 });
 
@@ -16,7 +17,7 @@ const orderSchema =mongoose.Schema({
   address:String,
   theOrderedProducts: [minimalPrudactSchema],
 orderDate:Date,
-  TheOrderHasStarted:Boolean ,
+  TheOrderHasStarted:Joi.boolean().default(false) ,
   userId:String
 
 });
@@ -32,9 +33,18 @@ export const orderValidatorForAdd= (_order) => {
       theOrderedProducts: Joi.array().items(Joi.object({
         CountProduct: Joi.number(),
         name: Joi.string(),
-        code: Joi.string()
+          // code: Joi.string(),
+        _id:Joi.string(),
+        // Providercode:Joi.string(),
+        // Discribe:Joi.string(),
+        // DateOfProduction:Joi.date(),
+        // ImagePath:Joi.string(),
+        // price:Joi.number(),
+      
+  
+        
     })).required().min(1).message("At least one order detail is required"),
-      TheOrderHasStarted:Joi.boolean().required(),
+      // TheOrderHasStarted:Joi.boolean().required(),
      
       
 

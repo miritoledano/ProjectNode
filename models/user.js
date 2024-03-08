@@ -6,14 +6,15 @@ const userSchema = mongoose.Schema({
     userName: String,
     password: String,
     email: { type: String, unique: false },
+    basket:[],
     role:{ type:String ,default : "user"}
 })
 export const userModel = mongoose.model("user", userSchema);
 export const orderValidatorForAdd= (_user) => {
   const orderValidationSchema = Joi.object({
       userName: Joi.string().required(),
-      password: Joi.string().required(),
-      email:Joi.string().required(),
+      password: Joi.string().min(6).max(10).required(),
+      email:Joi.string().email().required(),
      
       
       

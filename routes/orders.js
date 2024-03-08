@@ -7,6 +7,8 @@ routerP.get("/", getAllOrders);
 routerP.get("/:id",auth, getOrdertById);
 routerP.delete("/:id",auth,deleteOrder);
 routerP.put("/:id",authAdmin,updateById);
-routerP.post("/",auth, addOrder);
+ routerP.post("/",auth, addOrder);
+//  routerP.post("/", addOrder);
+
 
 export default routerP;
